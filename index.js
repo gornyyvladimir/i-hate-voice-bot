@@ -29,3 +29,4 @@ bot.start((ctx) => ctx.reply('Привет! Я посылаю оскорблен
 bot.help((ctx) => ctx.reply('Пришли мне голосовое сообщения, а я отвечу чем нибудь мерзким.'));
 bot.on(['voice', 'video_note'], (ctx) => ctx.reply(getMessage()));
 bot.launch();
+console.log('Start!');
