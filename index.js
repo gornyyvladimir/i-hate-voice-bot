@@ -1,4 +1,7 @@
+const express = require("express");
 const { Telegraf } = require('telegraf');
+
+const expressApp = express();
 
 const messages = [
   'Серьезно? Ты хочешь чтобы все это услышали?',
@@ -24,8 +27,8 @@ const getMessage = () => {
 const port = process.env.PORT || 3000;
 const token = process.env.BOT_TOKEN;
 
-expressApp.get("/", (req, res) => {
-  res.send("iHateVoiceBot is working");
+expressApp.get('/', (req, res) => {
+  res.send('iHateVoiceBot is working');
 });
 
 expressApp.listen(port, () => {
@@ -34,8 +37,8 @@ expressApp.listen(port, () => {
 
 const bot = new Telegraf(token);
 bot.catch((err, ctx) => {
-  console.log(`Ooops, encountered an error for ${ctx.updateType}`, err)
-})
+  console.log(`Ooops, encountered an error for ${ctx.updateType}`, err);
+});
 bot.start((ctx) => ctx.reply('Привет! Я посылаю оскорбления в ответ на голосовые сообщения.'));
 bot.help((ctx) => ctx.reply('Пришли мне голосовое сообщения, а я отвечу чем нибудь мерзким.'));
 bot.on(['voice', 'video_note'], (ctx) => ctx.reply(getMessage()));
