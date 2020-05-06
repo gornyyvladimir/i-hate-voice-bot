@@ -21,7 +21,18 @@ const getMessage = () => {
   return messages[index];
 };
 
-const bot = new Telegraf(process.env.BOT_TOKEN);
+const port = process.env.PORT || 3000;
+const token = process.env.BOT_TOKEN;
+
+expressApp.get("/", (req, res) => {
+  res.send("iHateVoiceBot is working");
+});
+
+expressApp.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
+
+const bot = new Telegraf(token);
 bot.catch((err, ctx) => {
   console.log(`Ooops, encountered an error for ${ctx.updateType}`, err)
 })
@@ -29,4 +40,3 @@ bot.start((ctx) => ctx.reply('Привет! Я посылаю оскорблен
 bot.help((ctx) => ctx.reply('Пришли мне голосовое сообщения, а я отвечу чем нибудь мерзким.'));
 bot.on(['voice', 'video_note'], (ctx) => ctx.reply(getMessage()));
 bot.launch();
-console.log('Start!');
