@@ -22,6 +22,9 @@ const getMessage = () => {
 };
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
+bot.catch((err, ctx) => {
+  console.log(`Ooops, encountered an error for ${ctx.updateType}`, err)
+})
 bot.start((ctx) => ctx.reply('Привет! Я посылаю оскорбления в ответ на голосовые сообщения.'));
 bot.help((ctx) => ctx.reply('Пришли мне голосовое сообщения, а я отвечу чем нибудь мерзким.'));
 bot.on(['voice', 'video_note'], (ctx) => ctx.reply(getMessage()));
