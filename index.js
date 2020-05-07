@@ -36,6 +36,9 @@ expressApp.listen(port, () => {
 });
 
 const bot = new Telegraf(token);
+bot.telegram.getMe().then((botInfo) => {
+  bot.options.username = botInfo.username
+})
 bot.catch((err, ctx) => {
   console.log(`Ooops, encountered an error for ${ctx.updateType}`, err);
 });
