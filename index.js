@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require('express');
 const { Telegraf } = require('telegraf');
 
 const expressApp = express();
@@ -24,8 +24,9 @@ const getMessage = () => {
   return messages[index];
 };
 
-const port = process.env.PORT || 3000;
 const token = process.env.BOT_TOKEN;
+const port = process.env.PORT || 3000;
+const url = process.env.URL || 'https://i-hate-voice-bot.herokuapp.com';
 
 expressApp.get('/', (req, res) => {
   res.send('iHateVoiceBot is working');
@@ -36,13 +37,15 @@ expressApp.listen(port, () => {
 });
 
 const bot = new Telegraf(token);
+expressApp.use(bot.webhookCallback(`/bot${token}`));
+bot.telegram.setWebhook(`${url}/bot${token}`);
 bot.telegram.getMe().then((botInfo) => {
-  bot.options.username = botInfo.username
-})
-bot.catch((err, ctx) => {
-  console.log(`Ooops, encountered an error for ${ctx.updateType}`, err);
+  bot.options.username = botInfo.username;
 });
+// bot.catch((err, ctx) => {
+//   console.log(`Ooops, encountered an error for ${ctx.updateType}`, err);
+// });
 bot.start((ctx) => ctx.reply('Привет! Я посылаю оскорбления в ответ на голосовые сообщения.'));
 bot.help((ctx) => ctx.reply('Пришли мне голосовое сообщения, а я отвечу чем нибудь мерзким.'));
 bot.on(['voice', 'video_note'], (ctx) => ctx.reply(getMessage()));
-bot.launch();
+// bot.launch();
