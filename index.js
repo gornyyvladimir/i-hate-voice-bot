@@ -1,6 +1,7 @@
 const express = require('express');
 const { Telegraf } = require('telegraf');
 const messages = require('./messages');
+const sendError = require('./sendError');
 
 //helper
 const getMessage = () => {
@@ -27,17 +28,7 @@ bot.telegram.getMe().then((botInfo) => {
 bot.start((ctx) => ctx.reply('Привет! Я посылаю оскорбления в ответ на голосовые сообщения.'));
 bot.help((ctx) => ctx.reply('Пришли мне голосовое сообщения, а я отвечу чем нибудь мерзким.'));
 bot.on(['voice', 'video_note'], (ctx) => ctx.reply(getMessage()));
-bot.catch((err, ctx) => {
-  const adminChatId = process.env.ADMIN_ID;
-  const errorMessage = `
-  Error: ${err.name} ${err.message}
-  link: ${url}
-  type: ${ctx.updateType}`;
-  // eslint-disable-next-line no-console
-  console.log(errorMessage, err);
-  ctx.telegram.sendMessage(adminChatId, errorMessage);
-  ctx.reply(config.errorMessage);
-});
+bot.catch((err, ctx) => sendError(err, ctx));
 
 // express server for web
 expressApp.get('/', (req, res) => {
