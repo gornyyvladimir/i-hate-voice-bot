@@ -1,10 +1,40 @@
 {
+  "name": "telegram-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-prettier": "^3.1.3",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.0.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gornyyvladimir/i-hate-voice-bot.git"
+  },
+  "keywords": [
+    "telegram",
+    "bot"
+  ],
+  "author": "Vladimir Gornyy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gornyyvladimir/i-hate-voice-bot/issues"
+  },
+  "homepage": "https://github.com/gornyyvladimir/i-hate-voice-bot#readme",
+  "description": "telegram bot hates voice messages",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "telegraf": "^3.38.0"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "lint": "eslint --fix ."
   },
   "engines": {
     "node": "12.x"
