@@ -21,6 +21,8 @@
 Для работы бота нужен токен, его можно получить у 
 [@botfather](https://t.me/BotFather "@botfather").
 
+⚠️ Если вы из России нужно запустить любой VPN с подключением из другой страны, так как сервер на вашем компьютере не сможет подключиться к серверам Telegram.
+
 ### Quick start
 ```sh
 git clone https://github.com/gornyyvladimir/i-hate-voice-bot.git
