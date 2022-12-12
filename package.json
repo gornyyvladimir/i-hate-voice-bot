@@ -28,7 +28,7 @@
   "description": "telegram bot hates voice messages",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "telegraf": "^3.38.0"
   },
   "scripts": {
